@@ -7,6 +7,56 @@
     <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #4f46e5, #3b82f6);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .line-animation {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            animation: moveLines 5s linear infinite;
+        }
+
+        @keyframes moveLines {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(100%);
+            }
+        }
+
+        .shape {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: moveShapes 10s linear infinite;
+        }
+
+        @keyframes moveShapes {
+            from {
+                transform: translateY(-100%) rotate(0deg);
+            }
+            to {
+                transform: translateY(100%) rotate(360deg);
+            }
+        }
+    </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
     <div class="bg-white rounded-lg shadow-md w-full max-w-4xl flex flex-col md:flex-row">
@@ -81,5 +131,27 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            for (let i = 0; i < 50; i++) {
+                const line = document.createElement('div');
+                line.classList.add('line-animation');
+                line.style.left = `${Math.random() * 100}vw`;
+                line.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                body.appendChild(line);
+            }
+
+            for (let i = 0; i < 20; i++) {
+                const shape = document.createElement('div');
+                shape.classList.add('shape');
+                shape.style.left = `${Math.random() * 100}vw`;
+                shape.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                shape.style.opacity = Math.random();
+                body.appendChild(shape);
+            }
+        });
+    </script>
 </body>
 </html>

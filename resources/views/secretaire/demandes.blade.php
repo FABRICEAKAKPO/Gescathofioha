@@ -22,6 +22,20 @@
 @endif
 
 <div class="mb-6">
+    <form method="GET" action="{{ route('secretaire.demandes') }}" class="flex items-center space-x-4">
+        <div class="flex-1">
+            <label for="search" class="block text-sm font-medium text-gray-700">Rechercher</label>
+            <input type="text" name="search" id="search" placeholder="Tapez une date, un nom ou un type de messe" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <div>
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Rechercher</button>
+        </div>
+    </form>
+</div>
+
+
+<div class="mb-6">
     <button onclick="document.getElementById('modal-add').classList.remove('hidden')" 
             class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
         <i class="fas fa-plus mr-2"></i>Ajouter une Demande

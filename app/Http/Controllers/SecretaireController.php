@@ -28,9 +28,18 @@ class SecretaireController extends Controller
         return view('secretaire.dashboard', compact('stats', 'recentes_demandes'));
     }
 
-    public function demandes(): View
+    public function demandes(Request $request): View
     {
-        $demandes = DemandeMesse::with(['celebrations' => function($query) {
+        $query = DemandeMesse::query();
+
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where('demandeur', 'like', "%$search%")
+                  ->orWhere('type_messe', 'like', "%$search%")
+                  ->orWhere('date_celebration', 'like', "%$search%");
+        }
+
+        $demandes = $query->with(['celebrations' => function($query) {
             $query->orderBy('date_celebration', 'asc')
                   ->orderBy('heure_celebration', 'asc');
         }])
